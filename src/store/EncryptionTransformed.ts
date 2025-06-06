@@ -2,7 +2,7 @@ import { createTransform } from "redux-persist";
 import CryptoJS from "crypto-js";
 import { showConsoleError } from "../util/ConsoleMessage";
 
-const SECRET_KEY = process.env.VITE_REDUX_SECRET_KEY;
+const SECRET_KEY = import.meta.env.VITE_REDUX_SECRET_KEY;
 if (!SECRET_KEY) {
   throw new Error("Missing VITE_REDUX_SECRET_KEY in environment variables");
 }

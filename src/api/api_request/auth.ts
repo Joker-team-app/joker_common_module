@@ -9,16 +9,7 @@ import type { VerifyAccountForResetPasswordPayload, VerifyAccountForResetPasswor
 import type { VerifyCodePayload } from "../response_payload/VerifyCodeRP.js";
 import { apiPostRequest, ApiType, createEncryptedPayload, type APIResponse } from "../util/apiUtils.js";
 
-import { Endpoint, notificationToken } from "../util/contants.js";
-
-export const validate = (value: string, fieldName: string) => {
-  if (!value) {
-    throw new Error(
-      `The field "${fieldName}" is required and cannot be empty.`
-    );
-  }
-  return value;
-};
+import { Endpoint, notificationToken, validate } from "../util/contants.js";
 
 export const login = async (
   username: string,
@@ -254,6 +245,7 @@ export const CheckPhoneExist = async (
     encryptedPayload
   );
 };
+
 
 export const Register = async (
   username: string,

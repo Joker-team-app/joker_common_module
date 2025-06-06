@@ -3,7 +3,6 @@ import { LoginResponse } from "../api/response_payload/LoginResponseRP.js";
 import { withLoading } from "../api/util/apiWrapper.js";
 import { APIResponse } from "../api/util/apiUtils.js";
 import { login } from "../api/api_request/auth.js";
-import { RootState } from "./store.js";
 
 interface loginState {
   loginResponse?: LoginResponse;
@@ -45,5 +44,8 @@ export const loginActions = loginSlice.actions;
 
 export default loginSlice.reducer;
 
-export const loginResponseDetails = (state: RootState) =>
-  state.login.loginResponse;
+export const loginResponseDetails = <
+  T extends { login: { loginResponse?: any } }
+>(
+  state: T
+) => state.login.loginResponse;

@@ -39,17 +39,19 @@ export const forgetPasswordSlice = createSlice({
   },
 });
 
-export const sendVerifyCode = withLoading(async (_dispatch, getState) => {
-  const email = getState().forgetPassword.email;
+export const sendVerifyCodePassword = withLoading(
+  async (_dispatch, getState) => {
+    const email = getState().forgetPassword.email;
 
-  await SendVerifyCode(
-    SendVerifyCodeAction.resetPassword,
-    ContactType.email,
-    email
-  );
-});
+    await SendVerifyCode(
+      SendVerifyCodeAction.resetPassword,
+      ContactType.email,
+      email
+    );
+  }
+);
 
-export const verifyCode = withLoading(
+export const verifyCodePassword = withLoading(
   async (dispatch, getState, pin: string) => {
     const email = getState().forgetPassword.email;
 

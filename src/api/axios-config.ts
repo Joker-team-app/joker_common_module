@@ -1,8 +1,14 @@
 import axios from "axios";
 import { apiKey } from "./util/contants";
 import { showConsoleError, showConsoleMessage } from "../util/ConsoleMessage";
-import { AuthErrors } from "../context/AuthContext.js";
 import { triggerGlobalLogout } from "../util/logoutHandlex";
+
+export interface AuthErrors {
+  data: {
+    error: string;
+    status: number;
+  };
+}
 
 axios.interceptors.request.use(
   async (config) => {

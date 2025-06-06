@@ -28,6 +28,6 @@
     "node_modules",
     "build", "dist"
   ],
-  "include": ["src", "src/global.d.ts", "types", "vite.config.ts", "eslint.config.js",],
+  "include": ["src", "src/global.d.ts", "types", "vite.config.ts", "eslint.config.js",  "modules/joker-api-core/src"],
 
 }

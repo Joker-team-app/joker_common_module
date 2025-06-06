@@ -1,10 +1,16 @@
 {
-  "name": "api-core",
+  "name": "joker-api-core",
   "private": true,
   "version": "0.0.0",
-  "main": "dist/api-core.umd.js",
-  "module": "dist/api-core.js",
+  "main": "dist/joker-api-core.umd.js",
+  "module": "dist/joker-api-core.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

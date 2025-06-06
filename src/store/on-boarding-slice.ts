@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 import { withLoading } from "../api/util/apiWrapper.js";
 import {
   CheckEmailExist,
@@ -9,7 +9,6 @@ import {
   VerifyCode,
   VerifyEmailCode,
 } from "../api/api_request/auth.js";
-import { AppDispatch } from "./store.js";
 import { SendVerifyCodeAction } from "../api/models/SendVerifyCodeAction.js";
 import { ContactType } from "../api/models/ContactType.js";
 import { showConsoleError } from "../util/ConsoleMessage.js";
@@ -90,7 +89,7 @@ export const checkPhoneExist = withLoading(
   }
 );
 
-export const setFullName = (name: string) => (dispatch: AppDispatch) => {
+export const setFullName = (name: string) => (dispatch: Dispatch) => {
   dispatch(onBoardingActions.setName(name));
 };
 

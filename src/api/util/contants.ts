@@ -6,7 +6,7 @@ import {
 } from "../../util/ConsoleMessage.js";
 import { FIREBASE_TOKEN, LOCAL_URL } from "../../util/StorageConstant.js";
 
-export const apiDomainName = "joker5api231.com/JokerPlusWeb/Main/v1";
+export const apiDomainName = import.meta.env.VITE_BASE_URL;
 export const BASE_URI = `https://${apiDomainName}`;
 
 export const getLocalApiUrl = () => {
@@ -41,6 +41,16 @@ export const Endpoint = {
   CheckUsername: `${getBaseUri()}/Member/CheckUsername`,
   CheckPhoneNumber: `${getBaseUri()}/Member/CheckPhoneNumber`,
 };
+
+export const validate = (value: string, fieldName: string) => {
+  if (!value) {
+    throw new Error(
+      `The field "${fieldName}" is required and cannot be empty.`
+    );
+  }
+  return value;
+};
+
 
 //API Constants
 export const notificationToken = localStorage.getItem(FIREBASE_TOKEN) ?? "";

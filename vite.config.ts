@@ -10,12 +10,13 @@ export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: path.resolve(__dirname, "src/index.ts"),
-      name: "ApiCore",
-      fileName: "api-core",
+      entry: path.resolve(__dirname, "src/main.tsx"),
+      name: "JokerApiCore",
+      fileName: "joker-api-core",
+      formats: ["es"],
     },
     rollupOptions: {
-      external: ["react", "axios"],
+      external: ["axios", "react", "redux", "react-redux"],
       output: {
         globals: {
           react: "React",
