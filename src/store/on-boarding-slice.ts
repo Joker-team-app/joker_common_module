@@ -1,0 +1,173 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { withLoading } from "../api/util/apiWrapper.js";
+import {
+  CheckEmailExist,
+  CheckPhoneExist,
+  CheckUsernameExist,
+  Register,
+  SendVerifyCode,
+  VerifyCode,
+  VerifyEmailCode,
+} from "../api/api_request/auth.js";
+import { AppDispatch } from "./store.js";
+import { SendVerifyCodeAction } from "../api/models/SendVerifyCodeAction.js";
+import { ContactType } from "../api/models/ContactType.js";
+import { showConsoleError } from "../util/ConsoleMessage.js";
+
+interface onBoardingState {
+  email: string;
+  mobile: string;
+  name: string;
+  emailVerificationId: string;
+  mobileVerificationCode: string;
+  newPassword: string;
+  username: string;
+  pin: string;
+}
+
+const initialState: onBoardingState = {
+  email: "",
+  mobile: "",
+  name: "",
+  emailVerificationId: "",
+  mobileVerificationCode: "",
+  newPassword: "",
+  username: "",
+  pin: "",
+};
+
+export const onBoardingSlice = createSlice({
+  name: "on-boarding",
+  initialState: initialState,
+  reducers: {
+    setEmail: (state, action: PayloadAction<string>) => {
+      state.email = action.payload;
+    },
+
+    setName: (state, action: PayloadAction<string>) => {
+      state.name = action.payload;
+    },
+
+    setEmailVerificationId: (state, action: PayloadAction<string>) => {
+      state.emailVerificationId = action.payload;
+    },
+
+    setMobile: (state, action: PayloadAction<string>) => {
+      state.mobile = action.payload;
+    },
+
+    setMobileVerificationCode: (state, action: PayloadAction<string>) => {
+      state.mobileVerificationCode = action.payload;
+    },
+
+    setPassword: (state, action: PayloadAction<string>) => {
+      state.newPassword = action.payload;
+    },
+
+    setUsername: (state, action: PayloadAction<string>) => {
+      state.username = action.payload;
+    },
+
+    setPin: (state, action: PayloadAction<string>) => {
+      state.pin = action.payload;
+    },
+
+    resetOnBoarding: () => initialState,
+  },
+});
+
+export const checkEmailExist = withLoading(
+  async (dispatch, _getState, email: string) => {
+    await CheckEmailExist(email);
+    dispatch(onBoardingActions.setEmail(email));
+  }
+);
+
+export const checkPhoneExist = withLoading(
+  async (dispatch, _getState, phone: string) => {
+    await CheckPhoneExist(phone);
+    dispatch(onBoardingActions.setMobile(phone));
+  }
+);
+
+export const setFullName = (name: string) => (dispatch: AppDispatch) => {
+  dispatch(onBoardingActions.setName(name));
+};
+
+export const sendVerifyCode = withLoading(
+  async (
+    dispatch,
+    _getState,
+    action: SendVerifyCodeAction,
+    contactType: ContactType,
+    contact: string
+  ) => {
+    await SendVerifyCode(action, contactType, contact);
+
+    if (contactType === ContactType.sms) {
+      dispatch(onBoardingActions.setMobile(contact));
+    } else {
+      dispatch(onBoardingActions.setEmail(contact));
+    }
+  },
+  (error, [, contactType]) => {
+    const errorObj = { errorObj: error, type: contactType };
+    showConsoleError(`sendVerifyCode---${JSON.stringify(errorObj)}`);
+    return errorObj;
+  }
+);
+
+export const verifyEmailCode = withLoading(
+  async (dispatch, getState, pin: string) => {
+    const email = getState().onBoarding.email;
+    const response = await VerifyEmailCode(email, pin);
+
+    dispatch(onBoardingActions.setEmail(email));
+    dispatch(
+      onBoardingActions.setEmailVerificationId(
+        response?.ResponseData?.toString() || ""
+      )
+    );
+  }
+);
+export const verifyCode = withLoading(
+  async (dispatch, getState, pin: string) => {
+    const mobile = getState().onBoarding.mobile;
+
+    await VerifyCode(
+      SendVerifyCodeAction.register,
+      ContactType.sms,
+      mobile,
+      pin
+    );
+
+    dispatch(onBoardingActions.setMobileVerificationCode(pin));
+  }
+);
+
+export const checkUsernameExist = withLoading(
+  async (dispatch, _getState, username: string) => {
+    await CheckUsernameExist(username);
+    dispatch(onBoardingActions.setUsername(username));
+  }
+);
+
+export const register = withLoading(async (dispatch, getState, pin: string) => {
+  const state = getState();
+
+  await Register(
+    state.onBoarding.username,
+    state.onBoarding.name,
+    state.onBoarding.email,
+    state.onBoarding.newPassword,
+    pin,
+    state.onBoarding.mobile,
+    state.onBoarding.mobileVerificationCode,
+    state.onBoarding.emailVerificationId
+  );
+  dispatch(onBoardingActions.resetOnBoarding());
+});
+
+export const onBoardingActions = onBoardingSlice.actions;
+
+export default onBoardingSlice.reducer;
