@@ -4,7 +4,7 @@ import {
   showConsoleError,
   showConsoleMessage,
 } from "../../util/ConsoleMessage.js";
-import { FIREBASE_TOKEN, LOCAL_URL } from "../../util/StorageConstant.js";
+import { FIREBASE_TOKEN, LOCAL_URL } from "../../util/StorageConstant";
 
 export const apiDomainName = import.meta.env.VITE_BASE_URL;
 export const BASE_URI = `https://${apiDomainName}`;
