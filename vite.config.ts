@@ -1,5 +1,4 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -7,19 +6,19 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default defineConfig({
-  plugins: [react()],
   build: {
     lib: {
-      entry: path.resolve(__dirname, "src/main.tsx"),
+      entry: path.resolve(__dirname, "src/main.ts"), // Only this is exposed
       name: "JokerApiCore",
-      fileName: "joker-api-core",
-      formats: ["es"],
+      fileName: "joker-api-core", // Will generate: joker-api-core.mjs
+      formats: ["es"], // You’ll get dist/joker-api-core.mjs
     },
     rollupOptions: {
-      external: ["axios", "react", "redux", "react-redux"],
+      external: ["react", "react-dom", "redux", "react-redux", "axios"],
       output: {
         globals: {
           react: "React",
+          "react-dom": "ReactDOM",
           axios: "axios",
         },
       },

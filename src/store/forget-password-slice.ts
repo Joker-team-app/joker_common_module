@@ -1,4 +1,9 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  PayloadAction,
+  Reducer,
+  UnknownAction,
+} from "@reduxjs/toolkit";
 import {
   ResetPassword,
   SendVerifyCode,
@@ -8,7 +13,7 @@ import { SendVerifyCodeAction } from "../api/models/SendVerifyCodeAction";
 import { ContactType } from "../api/models/ContactType";
 import { withLoading } from "../api/util/apiWrapper";
 
-interface ForgetPasswordState {
+export interface ForgetPasswordState {
   email: string;
   verificationCode: string;
   newPassword: string;
@@ -86,4 +91,7 @@ export const resetPassword = withLoading(
 
 export const forgetPasswordActions = forgetPasswordSlice.actions;
 
-export default forgetPasswordSlice.reducer;
+const forgetPasswordReducer: Reducer<ForgetPasswordState, UnknownAction> =
+  forgetPasswordSlice.reducer;
+
+export default forgetPasswordReducer;

@@ -1,10 +1,15 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  UnknownAction,
+  createSlice,
+  PayloadAction,
+  Reducer,
+} from "@reduxjs/toolkit";
 import { LoginResponse } from "../api/response_payload/LoginResponseRP.js";
 import { withLoading } from "../api/util/apiWrapper.js";
 import { APIResponse } from "../api/util/apiUtils.js";
 import { login } from "../api/api_request/auth.js";
 
-interface loginState {
+export interface loginState {
   loginResponse?: LoginResponse;
 }
 
@@ -42,7 +47,9 @@ export const loginApi = withLoading(
 
 export const loginActions = loginSlice.actions;
 
-export default loginSlice.reducer;
+const loginReducer: Reducer<loginState, UnknownAction> = loginSlice.reducer;
+
+export default loginReducer;
 
 export const loginResponseDetails = <
   T extends { login: { loginResponse?: any } }

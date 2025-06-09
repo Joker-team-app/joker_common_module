@@ -1,6 +1,6 @@
 import { createTransform } from "redux-persist";
 import CryptoJS from "crypto-js";
-import { showConsoleError } from "../util/ConsoleMessage";
+import { showConsoleError } from "../util/ConsoleMessage.js";
 
 const SECRET_KEY = import.meta.env.VITE_REDUX_SECRET_KEY;
 if (!SECRET_KEY) {

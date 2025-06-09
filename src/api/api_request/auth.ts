@@ -2,12 +2,23 @@ import { isValidEmail } from "../../util/Validator.js";
 import { ContactType } from "../models/ContactType.js";
 import { SendVerifyCodeAction } from "../models/SendVerifyCodeAction.js";
 import { VerifyAccountForResetPasswordType } from "../models/VerifyAccountForResetPasswordType.js";
-import type { LoginPayload, LoginResponse } from "../response_payload/LoginResponseRP.js";
+import type {
+  LoginPayload,
+  LoginResponse,
+} from "../response_payload/LoginResponseRP.js";
 import type { ResetPasswordPayload } from "../response_payload/ResetPasswordRP.js";
 import type { SendVerifyCodePayload } from "../response_payload/SendVerifyCodeRP.js";
-import type { VerifyAccountForResetPasswordPayload, VerifyAccountForResetPasswordResponse } from "../response_payload/VerifyAccountForResetPasswordRP.js";
+import type {
+  VerifyAccountForResetPasswordPayload,
+  VerifyAccountForResetPasswordResponse,
+} from "../response_payload/VerifyAccountForResetPasswordRP.js";
 import type { VerifyCodePayload } from "../response_payload/VerifyCodeRP.js";
-import { apiPostRequest, ApiType, createEncryptedPayload, type APIResponse } from "../util/apiUtils.js";
+import {
+  apiPostRequest,
+  ApiType,
+  createEncryptedPayload,
+  type APIResponse,
+} from "../util/apiUtils.js";
 
 import { Endpoint, notificationToken, validate } from "../util/contants.js";
 
@@ -245,7 +256,6 @@ export const CheckPhoneExist = async (
     encryptedPayload
   );
 };
-
 
 export const Register = async (
   username: string,

@@ -19,7 +19,7 @@ export {
   computeHash,
   apiPostRequest,
 } from "./api/util/apiUtils";
-export { withLoading } from "./api/util/apiWrapper";
+export * from "./api/util/apiWrapper";
 // export * from "./api/axios-config";
 
 // Store (Slices + Store)
@@ -29,4 +29,4 @@ export * from "./store/on-boarding-slice";
 export * from "./store/loading-slice";
 export { coreReducers, corePersistConfig } from "./store/store";
 
-export { setGlobalLogout, triggerGlobalLogout } from "./util/logoutHandlex";
+export  { setGlobalLogout, triggerGlobalLogout } from "./util/logoutHandlex";

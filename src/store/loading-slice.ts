@@ -1,6 +1,11 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  PayloadAction,
+  Reducer,
+  UnknownAction,
+} from "@reduxjs/toolkit";
 
-interface LoadingState {
+export interface LoadingState {
   isLoading: boolean;
 }
 
@@ -19,4 +24,7 @@ export const loadingSlice = createSlice({
 });
 
 export const { setLoading } = loadingSlice.actions;
-export default loadingSlice.reducer;
+const loadingReducer: Reducer<LoadingState, UnknownAction> =
+  loadingSlice.reducer;
+
+export default loadingReducer;

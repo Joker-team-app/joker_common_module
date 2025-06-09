@@ -1,4 +1,10 @@
-import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  Dispatch,
+  PayloadAction,
+  Reducer,
+  UnknownAction,
+} from "@reduxjs/toolkit";
 import { withLoading } from "../api/util/apiWrapper.js";
 import {
   CheckEmailExist,
@@ -13,7 +19,7 @@ import { SendVerifyCodeAction } from "../api/models/SendVerifyCodeAction.js";
 import { ContactType } from "../api/models/ContactType.js";
 import { showConsoleError } from "../util/ConsoleMessage.js";
 
-interface onBoardingState {
+export interface onBoardingState {
   email: string;
   mobile: string;
   name: string;
@@ -169,4 +175,7 @@ export const register = withLoading(async (dispatch, getState, pin: string) => {
 
 export const onBoardingActions = onBoardingSlice.actions;
 
-export default onBoardingSlice.reducer;
+const onBoardingReducer: Reducer<onBoardingState, UnknownAction> =
+  onBoardingSlice.reducer;
+
+export default onBoardingReducer;
