@@ -19,6 +19,8 @@ export {
   computeHash,
   apiPostRequest,
 } from "./api/util/apiUtils";
+export type { APIResponse } from "./api/util/apiUtils";
+
 export * from "./api/util/apiWrapper";
 // export * from "./api/axios-config";
 
