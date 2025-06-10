@@ -1,13 +1,13 @@
 {
-  "name": "joker-api-core",
+  "name": "joker-common-module",
   "private": true,
   "version": "1.0.0",
-  "main": "joker-api-core.mjs",
-  "module": "joker-api-core.mjs",
+  "main": "joker-common-module.mjs",
+  "module": "joker-common-module.mjs",
   "types": "main.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/joker-api-core.mjs",
+      "import": "./dist/joker-common-module.mjs",
       "types": "./dist/main.d.ts"
     }
   },

@@ -9,9 +9,9 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/main.ts"), // Only this is exposed
-      name: "JokerApiCore",
-      fileName: "joker-api-core", // Will generate: joker-api-core.mjs
-      formats: ["es"], // You’ll get dist/joker-api-core.mjs
+      name: "JokerCommonModule",
+      fileName: "joker-common-module", // Will generate: joker-common-module.mjs
+      formats: ["es"], // You’ll get dist/joker-common-module.mjs
     },
     rollupOptions: {
       external: ["react", "react-dom", "redux", "react-redux", "axios"],
