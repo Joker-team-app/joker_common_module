@@ -7,7 +7,7 @@ import {
 import { FIREBASE_TOKEN, LOCAL_URL } from "../../util/StorageConstant";
 
 export const apiDomainName = import.meta.env.VITE_BASE_URL;
-export const BASE_URI = `https://${apiDomainName}`;
+export const BASE_URI = `${apiDomainName}`;
 
 export const getLocalApiUrl = () => {
   const localApiLogged = localStorage.getItem(LOCAL_URL);
@@ -24,7 +24,7 @@ export const getLocalApiUrl = () => {
 };
 
 export const getBaseUri = () => {
-  showConsoleMessage("Using Default API URL:", BASE_URI);
+  showConsoleMessage("Main -Using Default API URL:", BASE_URI);
   return BASE_URI;
 };
 
