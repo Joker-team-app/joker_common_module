@@ -11,7 +11,11 @@ export * from "./api/response_payload/VerifyAccountForResetPasswordRP";
 export * from "./api/response_payload/VerifyCodeRP";
 
 // Utilities
-export { getLocalApiUrl, notificationToken } from "./api/util/contants";
+export {
+  getBaseUri,
+  getLocalApiUrl,
+  notificationToken,
+} from "./api/util/contants";
 export { aesEncrypt, sha256 } from "./api/util/cryptoUtils";
 export {
   ApiType,
