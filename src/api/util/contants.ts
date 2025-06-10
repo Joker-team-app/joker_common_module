@@ -52,7 +52,8 @@ export const validate = (value: string, fieldName: string) => {
 
 
 //API Constants
-export const notificationToken = localStorage.getItem(FIREBASE_TOKEN) ?? "";
+export const notificationToken =
+  localStorage.getItem(FIREBASE_TOKEN) ?? "12345";
 export const sha256Salt = String(import.meta.env.VITE_SHA256SALT);
 export const secretKey = String(import.meta.env.VITE_SECRET_KEY);
 export const apiKey = String(import.meta.env.VITE_API_KEY || "");
