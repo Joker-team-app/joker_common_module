@@ -6,8 +6,7 @@ import {
 } from "../../util/ConsoleMessage.js";
 import { FIREBASE_TOKEN, LOCAL_URL } from "../../util/StorageConstant";
 
-export const apiDomainName = import.meta.env.VITE_BASE_URL;
-export const BASE_URI = `${apiDomainName}`;
+export const BASE_URI = import.meta.env.VITE_BASE_URL;;
 
 export const getLocalApiUrl = () => {
   const localApiLogged = localStorage.getItem(LOCAL_URL);
