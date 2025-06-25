@@ -25,6 +25,7 @@ export interface onBoardingState {
   name: string;
   emailVerificationId: string;
   mobileVerificationCode: string;
+  emailVerificationCode: string;
   newPassword: string;
   username: string;
   pin: string;
@@ -36,6 +37,7 @@ const initialState: onBoardingState = {
   name: "",
   emailVerificationId: "",
   mobileVerificationCode: "",
+  emailVerificationCode: "",
   newPassword: "",
   username: "",
   pin: "",
@@ -63,6 +65,10 @@ export const onBoardingSlice = createSlice({
 
     setMobileVerificationCode: (state, action: PayloadAction<string>) => {
       state.mobileVerificationCode = action.payload;
+    },
+
+    setEmailVerificationCode: (state, action: PayloadAction<string>) => {
+      state.emailVerificationCode = action.payload;
     },
 
     setPassword: (state, action: PayloadAction<string>) => {
@@ -133,6 +139,7 @@ export const verifyEmailCode = withLoading(
         response?.ResponseData?.toString() || ""
       )
     );
+    dispatch(onBoardingActions.setEmailVerificationCode(pin));
   }
 );
 export const verifyCode = withLoading(
@@ -157,7 +164,7 @@ export const checkUsernameExist = withLoading(
   }
 );
 
-export const register = withLoading(async (dispatch, getState, pin: string) => {
+export const register = withLoading(async (dispatch, getState) => {
   const state = getState();
 
   await Register(
@@ -165,7 +172,7 @@ export const register = withLoading(async (dispatch, getState, pin: string) => {
     state.onBoarding.name,
     state.onBoarding.email,
     state.onBoarding.newPassword,
-    pin,
+    state.onBoarding.pin,
     state.onBoarding.mobile,
     state.onBoarding.mobileVerificationCode,
     state.onBoarding.emailVerificationId
