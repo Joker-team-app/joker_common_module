@@ -43,7 +43,7 @@ export {
   verifyCodePassword,
   resetPassword,
   forgetActions,
-  default as forgetPasswordReducer,
+  default as forgetReducer,
   recoverUsername,
 } from "./store/forget-slice";
 
