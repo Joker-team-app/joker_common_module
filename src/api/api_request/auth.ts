@@ -298,3 +298,24 @@ export const Register = async (
 
   return await apiPostRequest<string>(Endpoint.Register, encryptedPayload);
 };
+
+export const RecoverUsername = async (
+  email: string
+): Promise<APIResponse<string> | null> => {
+  const basePayload = {
+    Email: email,
+  };
+
+  const hashPayload = `${validate(email, "Email")}`;
+
+  const encryptedPayload = createEncryptedPayload(
+    basePayload,
+    hashPayload,
+    ApiType.Main
+  );
+
+  return await apiPostRequest<string>(
+    Endpoint.RecoverUsername,
+    encryptedPayload
+  );
+};

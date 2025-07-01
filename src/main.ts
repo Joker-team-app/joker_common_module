@@ -38,13 +38,14 @@ export {
 } from "./store/login-slice";
 
 export {
-  forgetPasswordSlice,
+  forgetSlice,
   sendVerifyCodePassword,
   verifyCodePassword,
   resetPassword,
-  forgetPasswordActions,
+  forgetActions,
   default as forgetPasswordReducer,
-} from "./store/forget-password-slice";
+  recoverUsername,
+} from "./store/forget-slice";
 
 export {
   onBoardingSlice,
