@@ -1,4 +1,4 @@
-import forgetPasswordReducer from "./forget-password-slice";
+import forgetReducer from "./forget-slice";
 import onBoardingReducer from "./on-boarding-slice";
 import loginReducer from "./login-slice";
 import loadingReducer from "./loading-slice";
@@ -7,7 +7,7 @@ import storage from "redux-persist/lib/storage";
 import { UnknownAction, Reducer } from "@reduxjs/toolkit";
 
 export const coreReducers: Record<string, Reducer<any, UnknownAction>> = {
-  forgetPassword: forgetPasswordReducer,
+  forget: forgetReducer,
   onBoarding: onBoardingReducer,
   login: loginReducer,
   loading: loadingReducer,

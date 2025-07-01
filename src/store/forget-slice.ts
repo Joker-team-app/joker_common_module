@@ -5,6 +5,7 @@ import {
   UnknownAction,
 } from "@reduxjs/toolkit";
 import {
+  RecoverUsername,
   ResetPassword,
   SendVerifyCode,
   VerifyCode,
@@ -13,20 +14,20 @@ import { SendVerifyCodeAction } from "../api/models/SendVerifyCodeAction";
 import { ContactType } from "../api/models/ContactType";
 import { withLoading } from "../api/util/apiWrapper";
 
-export interface ForgetPasswordState {
+export interface ForgetState {
   email: string;
   verificationCode: string;
   newPassword: string;
 }
 
 // Define the initial state using that type
-const initialState: ForgetPasswordState = {
+const initialState: ForgetState = {
   email: "",
   verificationCode: "",
   newPassword: "",
 };
 
-export const forgetPasswordSlice = createSlice({
+export const forgetSlice = createSlice({
   name: "forget-password",
   initialState: initialState,
   reducers: {
@@ -67,7 +68,7 @@ export const verifyCodePassword = withLoading(
       pin
     );
 
-    dispatch(forgetPasswordActions.setVerificationCode(pin));
+    dispatch(forgetActions.setVerificationCode(pin));
   }
 );
 
@@ -85,13 +86,18 @@ export const resetPassword = withLoading(
       password
     );
 
-    dispatch(forgetPasswordActions.setPassword(password));
+    dispatch(forgetActions.setPassword(password));
   }
 );
 
-export const forgetPasswordActions = forgetPasswordSlice.actions;
+export const recoverUsername = withLoading(
+  async (_dispatch, _getState, email: string) => {
+    await RecoverUsername(email);
+  }
+);
 
-const forgetPasswordReducer: Reducer<ForgetPasswordState, UnknownAction> =
-  forgetPasswordSlice.reducer;
+export const forgetActions = forgetSlice.actions;
 
-export default forgetPasswordReducer;
+const forgetReducer: Reducer<ForgetState, UnknownAction> = forgetSlice.reducer;
+
+export default forgetReducer;

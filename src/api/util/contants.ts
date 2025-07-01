@@ -6,7 +6,7 @@ import {
 } from "../../util/ConsoleMessage.js";
 import { FIREBASE_TOKEN, LOCAL_URL } from "../../util/StorageConstant";
 
-export const BASE_URI = import.meta.env.VITE_BASE_URL;;
+export const BASE_URI = import.meta.env.VITE_BASE_URL;
 
 export const getLocalApiUrl = () => {
   const localApiLogged = localStorage.getItem(LOCAL_URL);
@@ -39,6 +39,7 @@ export const Endpoint = {
   VerifyEmail: `${getBaseUri()}/Member/VerifyEmail`,
   CheckUsername: `${getBaseUri()}/Member/CheckUsername`,
   CheckPhoneNumber: `${getBaseUri()}/Member/CheckPhoneNumber`,
+  RecoverUsername: `${getBaseUri()}/Member/RecoverUsernameByEmail`,
 };
 
 export const validate = (value: string, fieldName: string) => {
@@ -49,7 +50,6 @@ export const validate = (value: string, fieldName: string) => {
   }
   return value;
 };
-
 
 //API Constants
 export const notificationToken =
