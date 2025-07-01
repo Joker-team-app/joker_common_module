@@ -47,7 +47,7 @@ export const forgetSlice = createSlice({
 
 export const sendVerifyCodePassword = withLoading(
   async (_dispatch, getState) => {
-    const email = getState().forgetPassword.email;
+    const email = getState().forget.email;
 
     await SendVerifyCode(
       SendVerifyCodeAction.resetPassword,
@@ -59,7 +59,7 @@ export const sendVerifyCodePassword = withLoading(
 
 export const verifyCodePassword = withLoading(
   async (dispatch, getState, pin: string) => {
-    const email = getState().forgetPassword.email;
+    const email = getState().forget.email;
 
     await VerifyCode(
       SendVerifyCodeAction.resetPassword,
@@ -75,8 +75,8 @@ export const verifyCodePassword = withLoading(
 export const resetPassword = withLoading(
   async (dispatch, getState, password: string) => {
     const state = getState();
-    const email = state.forgetPassword.email;
-    const pin = state.forgetPassword.verificationCode;
+    const email = state.forget.email;
+    const pin = state.forget.verificationCode;
 
     await ResetPassword(
       SendVerifyCodeAction.resetPassword,
