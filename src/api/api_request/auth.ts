@@ -266,7 +266,7 @@ export const Register = async (
   phoneNumber: string,
   tacCode: string,
   emailVerifyId: number
-): Promise<APIResponse<string> | null> => {
+): Promise<APIResponse<LoginResponse> | null> => {
   const basePayload = {
     Username: username,
     Name: name,
@@ -296,7 +296,10 @@ export const Register = async (
     ApiType.Main
   );
 
-  return await apiPostRequest<string>(Endpoint.Register, encryptedPayload);
+  return await apiPostRequest<LoginResponse>(
+    Endpoint.Register,
+    encryptedPayload
+  );
 };
 
 export const RecoverUsername = async (

@@ -51,8 +51,6 @@ const loginReducer: Reducer<loginState, UnknownAction> = loginSlice.reducer;
 
 export default loginReducer;
 
-export const loginResponseDetails = <
-  T extends { login: { loginResponse?: any } }
->(
-  state: T
-) => state.login.loginResponse;
+// joker-common-module/src/selectors/loginSelectors.ts
+export const loginResponseDetails = (state: any): LoginResponse | undefined =>
+  state?.login?.loginResponse;

@@ -18,6 +18,7 @@ import {
 import { SendVerifyCodeAction } from "../api/models/SendVerifyCodeAction.js";
 import { ContactType } from "../api/models/ContactType.js";
 import { showConsoleError } from "../util/ConsoleMessage.js";
+import { loginActions } from "./login-slice.js";
 
 export interface onBoardingState {
   email: string;
@@ -167,7 +168,7 @@ export const checkUsernameExist = withLoading(
 export const register = withLoading(async (dispatch, getState) => {
   const state = getState();
 
-  await Register(
+  const response = await Register(
     state.onBoarding.username,
     state.onBoarding.name,
     state.onBoarding.email,
@@ -177,6 +178,11 @@ export const register = withLoading(async (dispatch, getState) => {
     state.onBoarding.mobileVerificationCode,
     state.onBoarding.emailVerificationId
   );
+
+  if (response?.ResponseData) {
+    dispatch(loginActions.setLoginResponse(response.ResponseData));
+  }
+
   dispatch(onBoardingActions.resetOnBoarding());
 });
 

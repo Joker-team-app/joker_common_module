@@ -4,7 +4,7 @@ export { SendVerifyCodeAction } from "./api/models/SendVerifyCodeAction";
 export { VerifyAccountForResetPasswordType } from "./api/models/VerifyAccountForResetPasswordType";
 
 // API Response Payloads
-export * from "./api/response_payload/LoginResponseRP";
+export type { LoginResponse } from "./api/response_payload/LoginResponseRP";
 export * from "./api/response_payload/ResetPasswordRP";
 export * from "./api/response_payload/SendVerifyCodeRP";
 export * from "./api/response_payload/VerifyAccountForResetPasswordRP";
