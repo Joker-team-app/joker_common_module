@@ -1,7 +1,10 @@
 import { secretKey, sha256Salt } from "./contants";
 import { aesEncrypt, sha256 } from "./cryptoUtils";
 import { Request } from "../axios-config";
-import { showConsoleError, showConsoleMessage } from "../../util/ConsoleMessage";
+import {
+  showConsoleError,
+  showConsoleMessage,
+} from "../../util/ConsoleMessage";
 
 export interface APIResponse<T> {
   ResponseCode: number;
@@ -9,7 +12,7 @@ export interface APIResponse<T> {
   ResponseMsg: string;
 }
 
-export const enum ApiType {
+export enum ApiType {
   Local,
   Main,
 }
