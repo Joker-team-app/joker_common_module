@@ -4,10 +4,9 @@ import loginReducer from "./login-slice";
 import loadingReducer from "./loading-slice";
 import { encryptionTransformed } from "./EncryptionTransformed";
 import storage from "redux-persist/lib/storage";
-import { UnknownAction, Reducer } from "@reduxjs/toolkit";
 import { PersistConfig } from "redux-persist";
 
-export const coreReducers: Record<string, Reducer<any, UnknownAction>> = {
+export const coreReducers = {
   forget: forgetReducer,
   onBoarding: onBoardingReducer,
   login: loginReducer,
