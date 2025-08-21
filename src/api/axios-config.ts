@@ -45,7 +45,7 @@ axios.interceptors.response.use(
     return response;
   },
   (e) => {
-    showConsoleError("Response Error: ", e.response || e.message);
+    showConsoleError("Response Error: ", e.response, e.message);
     const error: AuthErrors = {
       data: { error: e.response || e.message || "Unknown error", status: -1 },
     };
