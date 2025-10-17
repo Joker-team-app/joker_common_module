@@ -17,7 +17,8 @@
   "scripts": {
     "dev": "vite",
     "build:types": "dts-bundle-generator --external-inlines -o dist/main.d.ts src/main.ts",
-    "build": "yarn build:types && vite build",
+    "build": "yarn run build:types && vite build --mode staging",
+    "build:prod": "yarn run build:types && vite build --mode production",
     "lint": "eslint .",
     "preview": "vite preview"
   },
