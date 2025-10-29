@@ -22,6 +22,14 @@ export const getLocalApiUrl = () => {
   return null;
 };
 
+export const saveLocalUrl = (url: string) => {
+  localStorage.setItem(LOCAL_URL, url);
+};
+
+export const removeLocalUrl = () => {
+  localStorage.removeItem(LOCAL_URL);
+};
+
 export const getBaseUri = () => {
   showConsoleMessage("Main -Using Default API URL:", BASE_URI);
   return BASE_URI;
