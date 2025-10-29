@@ -14,8 +14,11 @@ export * from "./api/response_payload/VerifyCodeRP";
 export {
   getBaseUri,
   getLocalApiUrl,
+  saveLocalUrl,
+  removeLocalUrl,
   notificationToken,
 } from "./api/util/contants";
+
 export { aesEncrypt, sha256 } from "./api/util/cryptoUtils";
 export {
   ApiType,
