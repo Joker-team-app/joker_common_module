@@ -19,7 +19,11 @@ export {
   notificationToken,
 } from "./api/util/contants";
 
-export { aesEncrypt, sha256 } from "./api/util/cryptoUtils";
+export {
+  aesEncrypt,
+  sha256,
+  decryptBackendPayload,
+} from "./api/util/cryptoUtils";
 export {
   ApiType,
   createEncryptedPayload,
@@ -35,6 +39,7 @@ export { withLoading } from "./api/util/apiWrapper";
 export {
   loginSlice,
   loginApi,
+  verifySoccerTokenApi,
   loginActions,
   loginResponseDetails,
   default as loginReducer,

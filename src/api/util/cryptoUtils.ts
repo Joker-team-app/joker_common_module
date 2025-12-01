@@ -33,3 +33,46 @@ export const aesEncrypt = (data: object, secretKey: string): string => {
     return "";
   }
 };
+
+export const decryptBackendPayload = <T = any>(
+  encryptedBase64: string,
+  secretKey: string,
+  secretIv?: string
+): T | null => {
+  try {
+    if (!encryptedBase64) {
+      console.error("decryptBackendPayload: empty ciphertext");
+      return null;
+    }
+
+    // 1) Build key
+    const key = CryptoJS.enc.Utf8.parse(secretKey);
+
+    const iv: any = secretIv ? CryptoJS.enc.Utf8.parse(secretIv) : key;
+
+    const aesOptions = {
+      mode: CryptoJS.mode.CBC,
+      padding: CryptoJS.pad.Pkcs7,
+      iv: iv, // or your IV
+    };
+
+    // 3) Decrypt from Base64
+    const decrypted = CryptoJS.AES.decrypt(encryptedBase64, key, aesOptions);
+
+    // 4) Convert bytes → UTF-8
+    const jsonText = decrypted.toString(CryptoJS.enc.Utf8);
+
+    if (!jsonText) {
+      console.error(
+        "decryptBackendPayload: decryption produced empty/invalid UTF-8. " +
+          "Likely wrong key/IV/mode or corrupted ciphertext."
+      );
+      return null;
+    }
+
+    return JSON.parse(jsonText) as T;
+  } catch (err) {
+    console.error("decryptBackendPayload: error decrypting data:", err);
+    return null;
+  }
+};
