@@ -7,7 +7,7 @@ import {
 import { LoginResponse } from "../api/response_payload/LoginResponseRP.js";
 import { withLoading } from "../api/util/apiWrapper.js";
 import { APIResponse } from "../api/util/apiUtils.js";
-import { login } from "../api/api_request/auth.js";
+import { login, verifySoccerToken } from "../api/api_request/auth.js";
 
 export interface loginState {
   loginResponse?: LoginResponse;
@@ -36,6 +36,24 @@ export const loginApi = withLoading(
     password: string
   ): Promise<APIResponse<LoginResponse> | null> => {
     const response = await login(username, password);
+
+    if (response?.ResponseData) {
+      dispatch(loginActions.setLoginResponse(response.ResponseData));
+    }
+
+    return response;
+  }
+);
+
+export const verifySoccerTokenApi = withLoading(
+  async (
+    dispatch,
+    _getState,
+    memberId: string,
+    token: string,
+    memberSecretKey: string
+  ): Promise<APIResponse<LoginResponse> | null> => {
+    const response = await verifySoccerToken(memberId, token, memberSecretKey);
 
     if (response?.ResponseData) {
       dispatch(loginActions.setLoginResponse(response.ResponseData));

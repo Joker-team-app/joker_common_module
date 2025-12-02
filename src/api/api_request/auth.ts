@@ -22,6 +22,31 @@ import {
 
 import { Endpoint, notificationToken, validate } from "../util/contants.js";
 
+export const verifySoccerToken = async (
+  memberId: string,
+  token: string,
+  memberSecretKey: string
+): Promise<APIResponse<LoginResponse> | null> => {
+  const basePayload = {
+    MemberId: memberId,
+    Token: token,
+  };
+
+  const hashPayload = `${memberId}${validate(token, "Token")}`;
+
+  const encryptedPayload = createEncryptedPayload(
+    basePayload,
+    hashPayload,
+    ApiType.Local,
+    memberSecretKey
+  );
+
+  return await apiPostRequest<LoginResponse>(
+    Endpoint.VerifySoccerToken(),
+    encryptedPayload
+  );
+};
+
 export const login = async (
   username: string,
   password: string

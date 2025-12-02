@@ -48,6 +48,8 @@ export const Endpoint = {
   CheckUsername: `${getBaseUri()}/Member/CheckUsername`,
   CheckPhoneNumber: `${getBaseUri()}/Member/CheckPhoneNumber`,
   RecoverUsername: `${getBaseUri()}/Member/RecoverUsernameByEmail`,
+
+  VerifySoccerToken: () => `${getLocalApiUrl()}/Soccer/VerifyTokenForSoccerWeb`,
 };
 
 export const validate = (value: string, fieldName: string) => {

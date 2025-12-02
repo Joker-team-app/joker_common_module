@@ -27,8 +27,8 @@ export const createEncryptedPayload = <T>(
     apiType == ApiType.Main
       ? sha256Salt
       : customSecretKey
-      ? customSecretKey
-      : secretKey;
+        ? customSecretKey
+        : secretKey;
   const hash = computeHash(hashPayload, salt);
   const payload = { ...basePayload, Hash: hash };
 
