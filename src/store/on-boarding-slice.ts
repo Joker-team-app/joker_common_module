@@ -10,6 +10,7 @@ import {
   CheckEmailExist,
   CheckPhoneExist,
   CheckUsernameExist,
+  EarlyBirdVerifyCode,
   Register,
   SendVerifyCode,
   VerifyCode,
@@ -21,6 +22,7 @@ import { showConsoleError } from "../util/ConsoleMessage.js";
 import { loginActions } from "./login-slice.js";
 
 export interface onBoardingState {
+  invitaitonCode?: string;
   email: string;
   mobile: string;
   name: string;
@@ -33,6 +35,7 @@ export interface onBoardingState {
 }
 
 const initialState: onBoardingState = {
+  invitaitonCode: "",
   email: "",
   mobile: "",
   name: "",
@@ -50,6 +53,10 @@ export const onBoardingSlice = createSlice({
   reducers: {
     setEmail: (state, action: PayloadAction<string>) => {
       state.email = action.payload;
+    },
+
+    setInvitaitonCode: (state, action: PayloadAction<string>) => {
+      state.invitaitonCode = action.payload;
     },
 
     setName: (state, action: PayloadAction<string>) => {
@@ -87,6 +94,15 @@ export const onBoardingSlice = createSlice({
     resetOnBoarding: () => initialState,
   },
 });
+
+
+export const earlyBirdVerifyCode = withLoading(
+  async (dispatch, _getState, email: string, invitationCode: string) => {
+    await EarlyBirdVerifyCode(email, invitationCode);
+    dispatch(onBoardingActions.setEmail(email));
+    dispatch(onBoardingActions.setInvitaitonCode(invitationCode));
+  }
+);
 
 export const checkEmailExist = withLoading(
   async (dispatch, _getState, email: string) => {
@@ -176,7 +192,8 @@ export const register = withLoading(async (dispatch, getState) => {
     state.onBoarding.pin,
     state.onBoarding.mobile,
     state.onBoarding.mobileVerificationCode,
-    state.onBoarding.emailVerificationId
+    state.onBoarding.emailVerificationId,
+    state.onBoarding.invitaitonCode
   );
 
   if (response?.ResponseData) {

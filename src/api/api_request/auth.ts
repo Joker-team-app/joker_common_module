@@ -231,6 +231,28 @@ export const ResetPassword = async (
   return await apiPostRequest<string>(Endpoint.ResetPassword, encryptedPayload);
 };
 
+
+
+export const EarlyBirdVerifyCode = async (
+  email: string,
+  invitationCode: string,
+): Promise<APIResponse<string> | null> => {
+  const basePayload = {
+    Email: email,
+    InvitationCode: invitationCode,
+  };
+  const hashPayload = `${email}${invitationCode}`;
+  const encryptedPayload = createEncryptedPayload(
+    basePayload,
+    hashPayload,
+    ApiType.Main
+  );
+
+  return await apiPostRequest<string>(Endpoint.EarlyBirdVerifyCode,encryptedPayload);
+};
+
+
+
 export const CheckEmailExist = async (
   email: string
 ): Promise<APIResponse<string> | null> => {
@@ -290,7 +312,8 @@ export const Register = async (
   pin: string,
   phoneNumber: string,
   tacCode: string,
-  emailVerifyId: number
+  emailVerifyId: number,
+  invitationCode?: string
 ): Promise<APIResponse<LoginResponse> | null> => {
   const basePayload = {
     Username: username,
@@ -303,6 +326,7 @@ export const Register = async (
     TACCode: tacCode,
     NotificationToken: notificationToken,
     EmailVerifyId: emailVerifyId,
+    InvitationCode: invitationCode || "",
   };
   const hashPayload = `${validate(name, "Name")}${validate(
     username,

@@ -36,6 +36,7 @@ export const getBaseUri = () => {
 };
 
 export const Endpoint = {
+  EarlyBirdVerifyCode: `${getBaseUri()}/Member/EarlyBirdVerifyCode`,
   Register: `${getBaseUri()}/Member/Register`,
   Login: `${getBaseUri()}/Member/LoginByUsername`,
   LoginByEmail: `${getBaseUri()}/Member/LoginByEmail`,
