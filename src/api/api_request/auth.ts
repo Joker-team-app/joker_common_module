@@ -202,6 +202,37 @@ export const VerifyEmailCode = async (
   return await apiPostRequest<string>(Endpoint.VerifyCode, encryptedPayload);
 };
 
+
+export const VerifyOnboardingEmailCode = async (
+  email: string,
+  verifyCode: string
+): Promise<
+  APIResponse<{
+    EmailVerifyId: number;
+  }> | null
+> => {
+  const action = SendVerifyCodeAction.register;
+  const type = ContactType.email;
+
+  const basePayload = {
+    Email: email,
+    VerifyCode: verifyCode,
+  };
+
+  const hashPayload = `${validate(email, "email")}${validate(
+    verifyCode,
+    "verifyCode"
+  )}`;
+
+  const encryptedPayload = createEncryptedPayload(
+    basePayload,
+    hashPayload,
+    ApiType.Main
+  );
+
+  return await apiPostRequest<{EmailVerifyId: number}>(Endpoint.VerifyEmail, encryptedPayload);
+};
+
 export const ResetPassword = async (
   action: SendVerifyCodeAction,
   type: ContactType,

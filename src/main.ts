@@ -58,6 +58,7 @@ export {
 export {
   onBoardingSlice,
   earlyBirdVerifyCode,
+  verifyOnboardingEmailCode,
   checkEmailExist,
   checkPhoneExist,
   setFullName,

@@ -15,6 +15,7 @@ import {
   SendVerifyCode,
   VerifyCode,
   VerifyEmailCode,
+  VerifyOnboardingEmailCode
 } from "../api/api_request/auth.js";
 import { SendVerifyCodeAction } from "../api/models/SendVerifyCodeAction.js";
 import { ContactType } from "../api/models/ContactType.js";
@@ -173,6 +174,22 @@ export const verifyCode = withLoading(
     dispatch(onBoardingActions.setMobileVerificationCode(pin));
   }
 );
+
+export const verifyOnboardingEmailCode = withLoading(
+  async (dispatch, getState, pin: string) => {
+    const email = getState().onBoarding.email;
+    const response = await VerifyOnboardingEmailCode(email, pin);
+
+    dispatch(onBoardingActions.setEmail(email));
+    dispatch(
+      onBoardingActions.setEmailVerificationId(
+        response?.ResponseData?.EmailVerifyId.toString() || ""
+      )
+    );
+    dispatch(onBoardingActions.setEmailVerificationCode(pin));
+  }
+);
+
 
 export const checkUsernameExist = withLoading(
   async (dispatch, _getState, username: string) => {
